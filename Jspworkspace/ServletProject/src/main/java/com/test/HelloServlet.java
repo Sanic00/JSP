@@ -30,4 +30,10 @@ public class HelloServlet extends HttpServlet {
 	public void destroy() {
 		System.out.println("destroy 요청");
 	}
+
+
+
+
+
+
 }
