@@ -1,6 +1,8 @@
 package com.sample;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
@@ -70,7 +72,30 @@ public class InitParam extends HttpServlet {
 	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//문서 HTML이 인코딩이 뭔지 알려주기 위해서 항상 써야된다 서블릿을 사용할때는
-		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		try {
+			//내부적으로 들어가는거기 떄문에 한번더 작성 
+			response.setContentType("text/html;charset=UTF-8");
+			out.println("<html>");
+			out.println("<body>");
+			
+			out.println("<li>회사명 :"+company+"</li>");
+			out.println("<li>담당자 :"+manager+"</li>");
+			out.println("<li>전화번호 :"+tel+"</li>");
+			out.println("<li>이메일 :"+email+"</li>");
+			
+			
+			out.println("</body>");
+			out.println("</html>");
+		
+		}finally {
+			out.close();
+		}
+		
+		
 		
 		
 	}

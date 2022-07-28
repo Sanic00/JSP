@@ -44,8 +44,34 @@
 </servlet-mapping>-->
 
 
+<!--  -->
+<context-param>
+<param-name>company</param-name>
+<param-value>GlobalIn</param-value>
+</context-param>
 
 
+<context-param>
+<param-name>manager</param-name>
+<param-value>JeongSang su</param-value>
+</context-param>
 
+<servlet>
+	<servlet-name>InitParam</servlet-name> 
+	<servlet-class>com.sample.InitParam</servlet-class>
+	<init-param>
+		<param-name>tel</param-name>
+		<param-value>010-1234-1234</param-value>
+	</init-param>
+	<init-param>
+		<param-name>email</param-name>
+		<param-value>gio@globalin.co.kr</param-value>
+	</init-param>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>InitParam</servlet-name> 
+	<url-pattern>/InitParam</url-pattern>
+</servlet-mapping>
 
 </web-app>
