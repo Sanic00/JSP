@@ -57,6 +57,11 @@ public class VisitInsert extends HttpServlet {
 			// 실행 (DB에 삽입 삭제 등 변경이 있을때만 실행)
 			pstmt.executeUpdate();
 			
+			
+			
+			
+			
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}catch(ClassNotFoundException e) {
@@ -67,7 +72,7 @@ public class VisitInsert extends HttpServlet {
 			try { if(con != null) con.close();}catch(SQLException ee) {}
 			}
 		
-		response.sendRedirect("VisitList");
+		response.sendRedirect("VisitList"); // 목록을 뿌리는거
 	}
 		
 		

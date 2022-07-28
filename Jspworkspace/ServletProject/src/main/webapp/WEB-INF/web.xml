@@ -14,11 +14,13 @@
 <servlet-mapping>
 	<servlet-name>helloServlet</servlet-name> 
 	<url-pattern>/world</url-pattern>-->
+<!-- 서블렛과 서블렛 맵핑 이름을 똑같이 해야된다. 클래스랑 이름겹치면안댐  -->
 
 
+<!--  
 <servlet>
-	<servlet-name>VisitInsert</servlet-name> <!-- 서블렛과 서블렛 맵핑 이름을 똑같이 해야된다. 클래스랑 이름겹치면안댐  -->
-	<servlet-class>com.bbs.VisitInsert</servlet-class> <!--불러올 클래스 -->
+	<servlet-name>VisitInsert</servlet-name>
+	<servlet-class>com.bbs.VisitInsert</servlet-class> 
 
 </servlet>
 
@@ -28,6 +30,22 @@
 
 
 </servlet-mapping>
+-->
+
+<servlet>
+	<servlet-name>VisitList</servlet-name> 
+	<servlet-class>com.bbs.VisitList</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>VisitList</servlet-name> 
+	<url-pattern>/VisitList</url-pattern>
+
+
+</servlet-mapping>
+
+
+
 
 
 
