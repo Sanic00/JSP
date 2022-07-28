@@ -47,14 +47,14 @@ public class VisitInsert extends HttpServlet {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver"); //orjdbc6를 불러오는 명령어
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"
-					, "scott", "tiger");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", 
+					"scott", "tiger");
 			
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, writer);
 			pstmt.setString(2, memo);
 			
-			// 실행
+			// 실행 (DB에 삽입 삭제 등 변경이 있을때만 실행)
 			pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -66,6 +66,7 @@ public class VisitInsert extends HttpServlet {
 			try { if(pstmt != null) pstmt.close();}catch(SQLException ee) {}
 			try { if(con != null) con.close();}catch(SQLException ee) {}
 			}
+		
 		response.sendRedirect("VisitList");
 	}
 		
