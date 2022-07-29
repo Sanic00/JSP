@@ -74,4 +74,17 @@
 	<url-pattern>/InitParam</url-pattern>
 </servlet-mapping> -->
 
+
+<!-- Listener 설정 -->
+
+<listener>
+	<listener-class>com.test.ContextListenerImpl</listener-class>
+</listener>
+
+
+
+
+
+
+
 </web-app>
