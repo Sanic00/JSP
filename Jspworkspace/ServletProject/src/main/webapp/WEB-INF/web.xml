@@ -45,7 +45,7 @@
 
 
 <!-- -->
-<context-param>
+<!-- <context-param>
 <param-name>company</param-name>
 <param-value>GlobalIn</param-value>
 </context-param>
@@ -72,6 +72,6 @@
 <servlet-mapping>
 	<servlet-name>InitParam</servlet-name> 
 	<url-pattern>/InitParam</url-pattern>
-</servlet-mapping>
+</servlet-mapping> -->
 
 </web-app>
