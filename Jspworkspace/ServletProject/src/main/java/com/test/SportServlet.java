@@ -32,15 +32,15 @@ public class SportServlet extends HttpServlet {
 		
 		 response.setContentType("text/html; charset = UTF-8");
 		 
-		 PrintWriter  out = response.getWriter();
+		 PrintWriter out = response.getWriter();
 		 
 		 out.println("<html>");
 		 out.println("<body>");
 		 
 		 for(String sport : sports) {
-				System.out.println("취미 :" + sport + ", ");																																																																																																																																																																																																																																																																																																		
+				System.out.println("취미 :" + sport + "<br>");																																																																																																																																																																																																																																																																																																		
 			}
-		 System.out.println("성별 :" + gender);
+		 System.out.println("성별 :" + gender + "<br>");
 		 
 		 out.println("</body>");
 		 out.println("</html>");
