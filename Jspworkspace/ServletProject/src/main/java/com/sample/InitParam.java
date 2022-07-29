@@ -42,7 +42,7 @@ public class InitParam extends HttpServlet {
 		
 		
 		/*
-		 * ServletConfig
+		 * ServletConfig (like 지역변수)
 		 * ServletConfig 객체는 Container 가 서블릿을 생성할때 생성되는 객체이다.
 		 * 
 		 * DD(web.xml 의약자)를 읽어서 이름/값을 쌍으로 된 초기화 파라미터를 읽어서 저장함
