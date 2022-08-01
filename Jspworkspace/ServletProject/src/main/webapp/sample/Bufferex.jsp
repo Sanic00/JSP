@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page buffer= "1kb" autoFlush = "true" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hello</title>
+<title></title>
 </head>
 <body>
- <h2>Hello JSP</h2>
+<% for(int i =0; i<1000; i++){ %>
+1234
+	
+<% } %>
 
- 	 현재 날짜와 시간은 : <%= new java.util.Date()%>
- 	 
- 	 <% %>
 
 </body>
 </html>
