@@ -77,10 +77,11 @@
 
 <!-- Listener 설정 -->
 
-<listener>
+<!-- <listener>
 	<listener-class>com.test.ContextListenerImpl</listener-class>
 </listener>
-
+ -->
+ 
 <!--2022-08-01-->
 <!-- 필터 등록 -->
 
@@ -95,11 +96,22 @@
 	<url-pattern>/*</url-pattern>
 </filter-mapping>
  -->
+<!--2022-08-02  -->
+<!-- 에러 페이지 등록 -->
 
+<error-page>
+	<error-code>404</error-code>
+	<location>/error/error404.jsp</location>
+</error-page>
 
-
-
-
-
+ <!-- <error-page> NULLPOINER랑 오류가 중복이 안나게 하기 위해서 주석처리함
+<error-code>500</error-code>
+<location>/error/error500.jsp</location>
+</error-page>
+ -->
+ <error-page>
+ 	<exception-type>java.lang.NullPointerException</exception-type>
+ 	<location>/error/errorNullPointer.jsp</location>
+</error-page>
 
 </web-app>

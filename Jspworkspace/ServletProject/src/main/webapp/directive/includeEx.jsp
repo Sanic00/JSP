@@ -7,7 +7,10 @@
    String name = "Gil Dong Hong";
    %>
    
-   
+  
+   <%
+   	
+   %>
    
    <%@ include file = "top.jsp" %>
    
