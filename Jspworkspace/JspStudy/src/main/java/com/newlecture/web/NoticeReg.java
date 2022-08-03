@@ -18,8 +18,8 @@ public class NoticeReg extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8"); //한글은 2바이트임 근데  리퀘스트인코딩을 utf을 설정하지않으면 1byte씩 처리되서 깨져버림
-		
+		//request.setCharacterEncoding("UTF-8"); //한글은 2바이트임 근데  리퀘스트인코딩을 utf을 설정하지않으면 1byte씩 처리되서 깨져버림
+		//
 		
 		PrintWriter out = response.getWriter();
 			//여기를 데이터베이스나 입출력으로 할수 있음
