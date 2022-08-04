@@ -17,7 +17,7 @@ public class CharacterEncodingFilter implements Filter {
 
 	}
 	
-	
+	// 필터는 클라이언트와 컨테이너 사이???
 	//요청 응답을 굳이 추가 할 필요 없이 필터라는 놈을 이용해가지고 utf-8 설정가능
 	// 필터가 서블렛을 실행할지 말지를 결정할 수가 있다.
 	@Override 
