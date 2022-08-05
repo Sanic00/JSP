@@ -23,7 +23,7 @@ public class Calculation extends HttpServlet {
 		int num2 = Integer.parseInt(request.getParameter("y"));
 		
 		int sum = num1 + num2;
-		sum = Integer.parseInt(request.getParameter("계산"));		
+		
 		out.println(sum);
 		
 	}
