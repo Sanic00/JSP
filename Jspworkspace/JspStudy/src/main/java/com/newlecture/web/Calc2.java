@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.jdi.Value;
+
 @WebServlet("/calc2")
 public class Calc2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -99,12 +101,16 @@ public class Calc2 extends HttpServlet {
 			Cookie opCookie = new Cookie("op", op);
 			
 			//모든페이지를 요청할때마다 valuecookie를 가져와라 
-			valueCookie.setPath("/Calc2");
-			opCookie.setPath("/Calc2");
+			valueCookie.setPath("/calc2");
+			valueCookie.setMaxAge(24*60*60); //만료시간 
+			opCookie.setPath("/calc2");
 			
 			//클리이언트 한테 전달
 			response.addCookie(valueCookie);
 			response.addCookie(opCookie);
+			
+			//사용자에게 다른 홈페이지로 전환 시킬수 있는 메소드
+			response.sendRedirect("calc2.html");
 			
 		}
 		
