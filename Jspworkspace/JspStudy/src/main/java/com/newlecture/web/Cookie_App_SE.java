@@ -30,7 +30,7 @@ public class Cookie_App_SE extends HttpServlet {
 	 * 생명주기 : WAS(web application server)가 시작해서 종료 할 때 까지
 	 * 저장위치 : WAS 서버의 메모리
 	 * 
-	 * Session
+	 * Session (보안에 좋음)
 	 * 사용범위 : 세션 범위에서 사용하는 저장 공간 
 	 * 생명주기 : 세션이 시작해서 종료 할 때 까지
 	 * 저장위치 : WAS 서버의 메모리
