@@ -10,7 +10,116 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
 
+  <!--  
+<servlet> 
+	<servlet-name>helloServlet</servlet-name> 
+	<servlet-class>com.test.HelloServlet</servlet-class> 
+</servlet>
+-->
 
+<!--  
+<servlet-mapping>
+	<servlet-name>helloServlet</servlet-name> 
+	<url-pattern>/world</url-pattern>-->
+<!-- 서블렛과 서블렛 맵핑 이름을 똑같이 해야된다. 클래스랑 이름겹치면안댐  -->
+
+
+<!--  방명록
+<servlet>
+	<servlet-name>VisitInsert</servlet-name>
+	<servlet-class>com.bbs.VisitInsert</servlet-class> 
+
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>VisitInsert</servlet-name> 
+	<url-pattern>/VisitInsert</url-pattern>
+
+
+</servlet-mapping>
+
+<servlet>
+	<servlet-name>VisitList</servlet-name> 
+	<servlet-class>com.bbs.VisitList</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>VisitList</servlet-name> 
+	<url-pattern>/VisitList</url-pattern>
+
+
+</servlet-mapping>-->
+
+
+<!-- -->
+<!-- <context-param>
+<param-name>company</param-name>
+<param-value>GlobalIn</param-value>
+</context-param>
+
+
+<context-param>
+<param-name>manager</param-name>
+<param-value>JeongSang su</param-value>
+</context-param>
+
+<servlet>
+	<servlet-name>InitParam</servlet-name> 
+	<servlet-class>com.sample.InitParam</servlet-class>
+	<init-param>
+		<param-name>tel</param-name>
+		<param-value>010-1234-1234</param-value>
+	</init-param>
+	<init-param>
+		<param-name>email</param-name>
+		<param-value>gio@globalin.co.kr</param-value>
+	</init-param>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>InitParam</servlet-name> 
+	<url-pattern>/InitParam</url-pattern>
+</servlet-mapping> -->
+
+
+<!-- Listener 설정 -->
+
+<!-- <listener>
+	<listener-class>com.test.ContextListenerImpl</listener-class>
+</listener>
+ -->
+ 
+<!--2022-08-01-->
+<!-- 필터 등록 -->
+
+<!-- <filter>
+	<filter-name>myFilter</filter-name>
+	<filter-class>com.test.MyFilter</filter-class>
+</filter>
+
+
+<filter-mapping>
+	<filter-name>myFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+ -->
+<!--2022-08-02  -->
+<!-- 에러 페이지 등록 -->
+
+<!-- <error-page>
+	<error-code>404</error-code>
+	<location>/error/error404.jsp</location>
+</error-page>
+ -->
+ <!-- <error-page> NULLPOINER랑 오류가 중복이 안나게 하기 위해서 주석처리함
+<error-code>500</error-code>
+<location>/error/error500.jsp</location>
+</error-page>
+ -->
+<!--  <error-page>
+ 	<exception-type>java.lang.NullPointerException</exception-type>
+ 	<location>/error/errorNullPointer.jsp</location>
+</error-page> -->
 
 
 
