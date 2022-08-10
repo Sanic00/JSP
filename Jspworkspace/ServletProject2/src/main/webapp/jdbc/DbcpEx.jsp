@@ -18,7 +18,7 @@
 <%
 
  Context initContext = new InitialContext();
-								  /*  경로 */
+								  				/*  경로 */
  DataSource ds = (DataSource)initContext.lookup("java:/comp/env/jdbc/myoracle");
 								  
  Connection conn = ds.getConnection();
