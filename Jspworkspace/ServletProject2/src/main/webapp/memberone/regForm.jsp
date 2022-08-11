@@ -94,8 +94,10 @@
 			
 			<tr>
 				<td colspan = "2" align="center">
-				<input type = "button" value = "회원가입" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type = "reset" value = "다시입력" onclick= "javascript:window.location='regForm.jsp'" >
+				<input type = "button" value = "회원가입" onclick = "#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 	<!--여기서 유해성 검사를 해야된다 이메일이 맞는지 비밀번호가 맞는지 등등  -->
+				 	<!-- <input type = "submit" value = "회원가입">  -->
+					<input type = "reset" value = "다시입력" onclick= "javascript:window.location='regForm.jsp'" >
 				</td>
 			 </tr>
 		
