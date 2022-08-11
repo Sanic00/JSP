@@ -19,7 +19,7 @@
 <br>
 <div align = "center">
 
-<b><%= id%></b>
+<b><%= id %></b>
 	<%
 	if(check) {
 		out.println("는 이미 존재하는 아이디입니다.<br><br>");

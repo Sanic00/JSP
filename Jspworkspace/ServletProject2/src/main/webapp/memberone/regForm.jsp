@@ -57,7 +57,7 @@
 					 	<option value = "032">032</option>
 					 	<option value = "033">033</option>
 					</select>-
-					<input type = "text" name = "phone2" size = "5">-
+					<input type = "text" name = "phone2" size = "5">
 					<input type = "text" name = "phone3" size = "5">
 				</td>
 			</tr>
@@ -88,13 +88,13 @@
 			<tr>
 				<td align= "right"> 상세 주소 </td>
 				<td>
-					<input type = "text" name = "address2" size = "30">
+					<input type = "text" name = "address2" size = "50">
 				</td>
 			</tr>
 			
 			<tr>
 				<td colspan = "2" align="center">
-				<input type = "button" value = "회원가입" >&nbsp;&nbsp;
+				<input type = "button" value = "회원가입" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type = "reset" value = "다시입력" onclick= "javascript:window.location='regForm.jsp'" >
 				</td>
 			 </tr>

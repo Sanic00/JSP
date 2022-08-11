@@ -7,12 +7,13 @@ name 	varchar2(10) not null,
 phone1 	varchar2(3) not null,
 phone2 	varchar2(4) not null,
 phone3 	varchar2(4) not null,
-enail 	varchar2(40) not null,
+email 	varchar2(40) not null,
 zipcode varchar2(7) not null,
 address1 varchar2(120) not null,
 address2 varchar2(60) not null,
 constraint student_pk primary key(id)
 );
+
 
 create table zipcode (
 seq number(5) not null,

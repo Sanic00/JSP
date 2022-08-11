@@ -17,7 +17,7 @@
 		<tr>
 			<td>
 				동이름 입력 : <input type="text" name = "dong">
-				<input type="button" value = "검색" onclick="#">
+				<input type="button" value = "검색" onclick="dongCheck()">
 			</td>
 		</tr>
 	</table>
