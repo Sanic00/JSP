@@ -72,7 +72,7 @@
 			<tr>
 				<td align="right"> 우편번호 </td>
 				<td>
-					<input type = "text" name = "email">
+					<input type = "text" name = "zipcode">
 					<input type = "button" value = "찾기" onclick = "zipCheck()"> 
 				</td>
 			</tr>

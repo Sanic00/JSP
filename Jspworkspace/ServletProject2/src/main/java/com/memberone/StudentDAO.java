@@ -88,7 +88,7 @@ public class StudentDAO {
 				//쿼리 작성
 				String strQuery = "select * from zipcode where dong like '"+dong+"%'";
 				
-				pstmt = conn.prepareStatement(strQuery);
+				pstmt = conn.prepareStatement(strQuery);                                                                                
 				rs = pstmt.executeQuery(); // 수정 삭제이 아니기에 쿼리
 				
 				while(rs.next()) {
