@@ -136,7 +136,7 @@ public class StudentDAO {
 			try {
 				
 				conn = getConnection();
-				//쿼리문 날리기
+				//쿼리문 날리기 회원가입 폼에서 ->DB로
 				String strQuery ="insert into student values(?,?,?,?,?,?,?,?,?,?)";
 				
 				pstmt = conn.prepareStatement(strQuery);
@@ -169,7 +169,151 @@ public class StudentDAO {
 			}
 			
 			return flag;
+		}// end of memberInsert
+		
+		/*
+		 * 로그인 버튼을 클릭하면 입력한 아이디와 비밀번호를 데이터베이스에 저장되어 있는 
+		 * 아이디와 비밀번호를 비교해서 같으면 로그인 성공 다르면 실패 처리를 해야함
+		 * 데이터 베이스에서 아이디와 비밀번호를 비교하여 그 결과를 정수형으로 리턴해주는 메소드를 구현
+		 * 정수형 1: 로그인 성공 , 0 : 비밀번호 오류, -1 : 아이디 없음  <-이거를 리턴
+		 * 
+		 */
+		
+		//아이디와 비밀번호를 매개변수로 가져와야됨
+		public int loginCheck(String id, String pass) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;  //바인딩할때 동적이라서 preparedst.. 써야됨
+			ResultSet rs = null;
+			
+			//일단은 아이디 없는걸로 설정
+			int check = -1; 
+			
+			try {
+				conn = getConnection(); //db연결
+				
+				//쿼리문 날리기 
+				String strQuery = "select pass from student where id =?";
+				pstmt = conn.prepareStatement(strQuery);
+				pstmt.setString(1, id);
+				
+				rs = pstmt.executeQuery(); //select 조회이기 때문에
+				if(rs.next()) {
+					String dbPass = rs.getString("pass");
+					if(pass.equals(dbPass)) check=1;//위에 파라미터값으로 들어온거를 비교 
+					else check = 0;
+				}
+				
+			}catch(SQLException s1) {	
+				s1.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(rs != null) try{rs.close();}catch(SQLException s1){}
+				if(pstmt != null) try{pstmt.close();}catch(SQLException s2){}
+				if(conn != null) try{conn.close();}catch(SQLException s3){}		
+			}
+			
+			return check;
+		} //end of loginCheck
+		
+		
+		//로그인이 된후에 정보수정 DB에서 끌어다 써야됨
+		//자바에서는 vo에 저장됨
+		public StudentVO getMember(String id) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;  //바인딩할때 동적이라서 preparedst.. 써야됨
+			ResultSet rs = null;
+			
+			//VO객체 선언
+			StudentVO vo = null; 
+			
+			try {
+				
+				conn = getConnection();
+				String strQuery = "select * from student where id=?";
+				pstmt = conn.prepareStatement(strQuery);
+				
+				pstmt.setString(1, id);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) { //아이디에 해당하는 회원이 존재한다면 가져와야됨
+					//객체먼저 가져옴
+					vo = new StudentVO();
+					//db에서 가져와야됨 rs에서 가져오는거는 DB컬럼명이랑 같아야됨
+					vo.setId(rs.getString("id"));
+					vo.setPass(rs.getString("pass"));
+					vo.setName(rs.getString("name"));
+					vo.setPhone1(rs.getString("phone1"));
+					vo.setPhone2(rs.getString("phone2"));
+					vo.setPhone3(rs.getString("phone3"));
+					vo.setZipcode(rs.getString("zipcode"));
+					vo.setAddress1(rs.getString("address1"));
+					vo.setAddress2(rs.getString("address2"));
+				}
+				
+				
+			} catch(SQLException s1) {	
+				s1.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(rs != null) try{rs.close();}catch(SQLException s1){}
+				if(pstmt != null) try{pstmt.close();}catch(SQLException s2){}
+				if(conn != null) try{conn.close();}catch(SQLException s3){}		
+			}
+			
+			return vo;
+			
 		}
+		
+		//정보수정 버튼을 클릭했을 경우 DB에  update를 수행시켜 저장 시켜야됨
+		// 정보수정 처리를 할 수 있는 메소드 구현 
+	 
+		public void updateMember(StudentVO vo) {
+			//rs는 이미 getmeber에서 가져왔기 때문에 안써도됨
+			Connection conn = null;
+			PreparedStatement pstmt = null;  //바인딩할때 동적이라서 preparedst.. 써야됨
+		
+			try {
+				
+				conn = getConnection();
+	String strQuery = "update student set pass = ?, phone1=?, phone2=?, phone3=?, email=?, zipcode=?,address1=?,address2=? where id=?";
+				pstmt = conn.prepareStatement(strQuery);
+				
+				pstmt.setString(1, vo.getPass());
+				pstmt.setString(2, vo.getPhone1());
+				pstmt.setString(3, vo.getPhone2());
+				pstmt.setString(4, vo.getPhone3());
+				pstmt.setString(5, vo.getEmail());
+				pstmt.setString(6, vo.getZipcode());
+				pstmt.setString(7, vo.getAddress1());
+				pstmt.setString(8, vo.getAddress2());
+				pstmt.setString(9, vo.getId());
+				
+				pstmt.executeUpdate();
+				
+				
+				
+				
+			} catch(SQLException s1) {	
+				s1.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(pstmt != null) try{pstmt.close();}catch(SQLException s2){}
+				if(conn != null) try{conn.close();}catch(SQLException s3){}		
+			}
+			
+		}
+		
+		
+		
+		
+		
+		
 		
 		
 }
