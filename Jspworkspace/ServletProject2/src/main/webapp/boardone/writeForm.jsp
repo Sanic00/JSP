@@ -97,7 +97,7 @@
 		
 			<tr>			
 				<td colspan="2" bgcolor ="<%=value_c %>" align = "center">
-					<input type = "submit" value ="글쓰기">
+					<input type = "submit" value ="글쓰기"><!-- 글쓰기를 눌루면 writeProc로 넘어가서 처리함 -->
 					<input type = "reset" value ="다시작성">
 					<input type = "button" value ="목록" onclick="window.location ='list.jsp'">
 				</td>
