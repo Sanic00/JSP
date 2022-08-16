@@ -275,8 +275,8 @@ public class StudentDAO {
 		public void updateMember(StudentVO vo) {
 			//rs는 이미 getmeber에서 가져왔기 때문에 안써도됨
 			Connection conn = null;
-			PreparedStatement pstmt = null;  //바인딩할때 동적이라서 preparedst.. 써야됨
-		
+			PreparedStatement pstmt = null;  //바인딩할때 동적이라서 PreparedStatement 써야됨
+	
 			try {
 				
 				conn = getConnection();
@@ -307,11 +307,70 @@ public class StudentDAO {
 				if(conn != null) try{conn.close();}catch(SQLException s3){}		
 			}
 			
+		} //end of updateMember
+		
+		
+		/*
+		 * 회원탈퇴 버튼을 클릭하면 데이터베이스에 회원데이터가 삭제되어야 한다.
+		 * 데이터베이스에서 삭제처리해줄 메소드 구현 
+		 */
+		
+		public int deleteMember(String id, String pass) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;  //바인딩할때 동적이라서 preparedst.. 써야됨
+			ResultSet rs = null; //정보가 rs에 저장되있으니 가져와야됨
+			
+			String dbPass = ""; // DB에 저장되어 있는 비밀번호를 의미함
+			
+		   // 결과값을 반환해줄 변수
+			int result = -1; 
+			
+			try {
+				conn = getConnection();
+				
+				
+				String strQuery = "select pass from student where id=?";
+				
+				pstmt = conn.prepareStatement(strQuery);
+				
+				pstmt.setString(1, id);
+				
+				rs = pstmt.executeQuery();
+				
+				//데이터가 있다면
+				if(rs.next()) {
+										 	//이거 db테이블 컬럼임
+					dbPass = rs.getString("pass");
+					
+					//일치 한다면 (본인확인) ==> true int형으로 1임
+					if(dbPass.equals(pass)) {
+						pstmt = conn.prepareStatement("delete from student where id =?");
+						pstmt.setString(1, id);
+						pstmt.executeUpdate();
+						
+						result = 1; // 회원탈퇴 성공
+					} else { //비밀번호 오류 --> 본인 확인 실패
+						result = 0;
+					}
+				}
+				
+				
+			}catch(SQLException s1) {	
+				s1.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(rs != null) try{rs.close();}catch(SQLException s1){}
+				if(pstmt != null) try{pstmt.close();}catch(SQLException s2){}
+				if(conn != null) try{conn.close();}catch(SQLException s3){}		
+			}
+			
+			return result;
+			
+			
+			
 		}
-		
-		
-		
-		
 		
 		
 		

@@ -1,6 +1,6 @@
 function idCheck(id) {
 	if(id == "") {
-		alert("아이디를 입력해 주세요.");
+		alert("아이디를 입력해.");
 		document.regForm.id.focus();
 	}else {
 	 url = "idCheck.jsp?id=" +id
@@ -220,6 +220,19 @@ function updateCheck() {
 	document.regForm.submit();	
 }
 
-	
+//회원탈퇴 
+function begin() {
+	document.myForm.pass.focus(); 
+}
+
+
+function checkIt() {
+	//마이폼안에 밸류값에 아무것도 없으면 
+	if(!document.myForm.pass.value){
+		alert("비밀번호를 입력하지 않았습니다.");
+		document.myForm.pass.focus(); //alert가 뜨고 다시 focus를 pass에 
+		return false;
+	}
+}	
 
 

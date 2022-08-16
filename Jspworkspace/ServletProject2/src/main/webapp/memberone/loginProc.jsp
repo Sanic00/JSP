@@ -19,12 +19,12 @@
 		}else if (check == 0) { // 아이디는 존재하는데 비밀번호가 오류일때
 			
     %>
-    <<script type="text/javascript">
+    <script type="text/javascript">
 		alert("비밀번호가 틀렸습니다.");
 		history.go(-1); // 바로 이전페이지로 
 </script>
     <% } else { //아이디가 존재 하지 않을때 %>
-     <<script type="text/javascript">
+     <script type="text/javascript">
 		alert("아이디가 존재하지않습니다.");
 		history.go(-1); // 바로 이전페이지로 
 </script>

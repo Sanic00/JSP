@@ -18,7 +18,7 @@
 <head>
 <title>회원 정보 수정 완료</title>
 </head>
-<meta http-equiv ="Refresh" content = "3; url=login.jsp">
+<meta http-equiv ="Refresh" content = "3; url=login.jsp"> <!-- 여기부분으로 바로 이동 가능 숫자3을 0으로 하면 0초 -->
 <body>
  <div align="center">
  <font size = "5" face="궁서체">

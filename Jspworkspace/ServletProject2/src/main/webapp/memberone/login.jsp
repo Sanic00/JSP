@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%
-    											//loginProc에 있는 session key값이랑 똑같아야됨
+    <%										//loginProc에 있는 session key값이랑 똑같아야됨
      String loginID = (String)session.getAttribute("loginID");
     %>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>

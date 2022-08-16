@@ -13,7 +13,7 @@ address1 varchar2(120) not null,
 address2 varchar2(60) not null,
 constraint student_pk primary key(id)
 );
-
+select * from STUDENT;
 
 create table zipcode (
 seq number(5) not null,
@@ -27,4 +27,5 @@ bunji varchar2(20),
 constraint zipcode_pk primary key(seq)
 );
 
-select * from STUDENT;
+
+
