@@ -8,7 +8,6 @@
     
     <!--심플 데이터의 객체 생성  -->
     <%!
-    
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm"); 
     %>
     
