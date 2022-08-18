@@ -141,7 +141,10 @@ public class BoardDAO {
 	 * 이때 쓰는것이 List<BoardVO>
 	 */
 	
-	public List<BoardVO> getArticles(){
+	
+	//여기다 글 게시판 페이지 수를 해줘야됨
+	//start : 시작번호 , end 끝페이지
+	public List<BoardVO> getArticles(int start, int end){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -150,11 +153,23 @@ public class BoardDAO {
 		
 		try {
 			conn = ConnUtil.getConnection();                 //내림차순으로
- 			pstmt = conn.prepareStatement("select * from board order by num desc");
- 			rs = pstmt.executeQuery();
+			/* pstmt = conn.prepareStatement("select * from board order by num desc"); */
+			//안쪽 쿼리가 서브 바깥쪽 쿼리가 메인
+			pstmt = conn.prepareStatement("select * from (" 
+			+ "select rownum rnum, num, writer, email, subject, "
+			+ "pass, regdate, readcount, ref, step, depth, content, ip from ("
+			+ "select * from board order by ref desc, step asc))"
+			+ "where rnum >=? and rnum <= ? "); //rnum이 시작번호 
+			
+			//위에 쿼리문에서 바인딩 함수가 2개임
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			
+			rs = pstmt.executeQuery();
  			
  			if(rs.next()) {
- 				articleList = new ArrayList<>();
+ 				articleList = new ArrayList<>(end - start +1);
  				do {
  					
  					BoardVO article = new BoardVO();
@@ -357,9 +372,150 @@ public class BoardDAO {
 			
 			return result;
 			
+	 } // end of updateArticle
+	 
+	 /*
+	  * 글 삭제 처리
+	  * 글삭제 폼에서 비밀번호를 입력하고 삭제를 수행하면 데이터베이스에서 비밀번호를 검색해서
+	  * 비밀 번호가 일치하면 삭제 처리를 수행하고 그렇지 않으면 비밀번호 오류 설정
+	  */
+	 
+	 public int deleteArticle(int num, String pass) {
+			
+		 	Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String dbpasswd = "";
+			
+			int result = -1; 
+		
+			try {
+			
+				conn = ConnUtil.getConnection();
+				
+				pstmt = conn.prepareStatement("select pass from board where num =?"); //패스워드를 가져와야된다
+				// num을 가지고 온다
+				pstmt.setInt(1, num); 
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					dbpasswd = rs.getString("pass");
+					
+					if(dbpasswd.equals(pass)) {
+						
+						pstmt = conn.prepareStatement("delete from board where num=?");
+						
+	
+						pstmt.setInt(1, num);
+						
+						pstmt.executeUpdate();
+						result =1; // 글 삭제 성공
+						
+					}else {
+						result =0; // 비밀번호 오류
+					}
+				}
+				
+				
+			}catch (SQLException s1) {
+				s1.printStackTrace();
+			} finally {
+				if(rs != null) try{rs.close();}catch(SQLException s1){}
+				if(pstmt != null) try{pstmt.close();}catch(SQLException s2){}
+				if(conn != null) try{conn.close();}catch(SQLException s3){}		
+			}
+			return result;
 	 }
 	 
+	 //오버라이딩 매개변수가 달름 위에꺼랑 조심!
+	 public int getArticleCount(String what, String content) {
+
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			int x =0;
+			
+			try {
+				conn = ConnUtil.getConnection();
+				pstmt = conn.prepareStatement("select count(*) from board"); //전체 개수를 얻어 온다
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					x = rs.getInt(1); //첫번째 컬럼을 가져온다 첫번째 컬럼이 num?
+				}
+				//list를 arraylist에 저장한 다음에 그걸로 뿌려준다.
+				
+				
+			}catch (SQLException s1) {
+				s1.printStackTrace();
+			} finally {
+				if(rs != null) try{rs.close();}catch(SQLException s1){}
+				if(pstmt != null) try{pstmt.close();}catch(SQLException s2){}
+				if(conn != null) try{conn.close();}catch(SQLException s3){}		
+			}
+			
+			return x;
+		}// end of  getArticleCount
 	 
-	 
-	
+	 //오버라이딩 매개변수 4
+	 	public List<BoardVO> getArticles(String what, String content, int start, int end){
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			List<BoardVO> articleList = null; //리턴할 객체 생성
+			
+			try {
+				conn = ConnUtil.getConnection();                 //내림차순으로
+				/* pstmt = conn.prepareStatement("select * from board order by num desc"); */
+				//안쪽 쿼리가 서브 바깥쪽 쿼리가 메인
+				pstmt = conn.prepareStatement("select * from (" 
+				+ "select rownum rnum, num, writer, email, subject, "
+				+ "pass, regdate, readcount, ref, step, depth, content, ip from ("
+				+ "select * from board order by ref desc, step asc))"
+				+ "where rnum >=? and rnum <= ? "); //rnum이 시작번호 
+				
+				//위에 쿼리문에서 바인딩 함수가 2개임
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				
+				
+				rs = pstmt.executeQuery();
+	 			
+	 			if(rs.next()) {
+	 				articleList = new ArrayList<>(end - start +1);
+	 				do {
+	 					
+	 					BoardVO article = new BoardVO();
+	 					
+	 					article.setNum(rs.getInt("num"));
+	 					article.setWriter(rs.getString("writer"));
+	 					article.setEmail(rs.getString("email"));
+	 					article.setSubject(rs.getString("subject"));
+	 					article.setPass(rs.getString("pass"));
+	 					article.setRegdate(rs.getTimestamp("regdate"));
+	 					article.setReadcount(rs.getInt("readcount"));
+	 					article.setRef(rs.getInt("ref"));
+	 					article.setStep(rs.getInt("step"));
+	 					article.setDepth(rs.getInt("depth"));
+	 					article.setContent(rs.getString("content"));
+	 					article.setIp(rs.getString("ip"));
+	 				
+	 				
+	 					articleList.add(article);
+	 				}while(rs.next()); //안에 있으면 계속 반복해서 꺼내라
+	 				
+	 			}
+				
+			}catch (SQLException s1) {
+				s1.printStackTrace();
+			} finally {
+				if(rs != null) try{rs.close();}catch(SQLException s1){}
+				if(pstmt != null) try{pstmt.close();}catch(SQLException s2){}
+				if(conn != null) try{conn.close();}catch(SQLException s3){}		
+			}
+			
+			return articleList;
+		} //end of getArticles
 }
