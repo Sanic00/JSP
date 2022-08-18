@@ -7,23 +7,75 @@
     <%@ include file = "view/color.jsp" %> 
     
     <!--심플 데이터의 객체 생성  -->
-    <%!
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm"); 
-    %>
+    <% 
     
-  
-    <%
+    //한 페이지에  보여줄 글 목록 수 지정
+    int pageSize = 8;
+    
+    //날짜 형식 지정
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm"); 
+    
+    //페이지 num을 가져온다
+    String pageNum = request.getParameter("pageNum");
+    
+    
+    //검색 파라미터값으로 가져온다
+    //무엇을 검색할지 파라미터 가져와야함(작성자,제목,내용)
+    String searchWhat = request.getParameter("searchWhat");
+    
+    //검색할 내용
+    String searchText = request.getParameter("searchText");
+    
+    //가져온 파라미터를 한글로 인코딩 변환
+	if(searchText != null){						//utf-8 두번쓰는이유가 하나는 키 다른건 파라미터					
+		searchText = new String(searchText.getBytes("UTF-8"),"UTF-8");
+	}
+    
+    if(pageNum == null){
+    	pageNum = "1";
+    }
+    //현재 페이지 
+    int currentPage =Integer.parseInt(pageNum);
+    
+    int startRow = (currentPage-1) * pageSize + 1; 
+    int endRow = currentPage* pageSize;
+    
+ 	
+    
+    
     int count = 0;
    	int number =0;
    	List<BoardVO> articleList = null;
    	BoardDAO dbPro = BoardDAO.getInstance(); // db연결
    	
- 	count = dbPro.getArticleCount(); //전체글수를 가져옴
-	if(count > 0){ //글이 있다면
-	articleList = dbPro.getArticles();
+   	//검색이 아니면 전체 목록을 보여줘야되고 , 검색이면 검색한 내용만 보여줘야 된다.
+   	if(searchText == null) { //null 이면 검색이 아닌경우
+   		
+   	 	//전체글수를 가져옴
+   	 	count = dbPro.getArticleCount(); 
+   	 if(count > 0){ 
+ 		//하나라도 존재 하면 리스트를 출력해라
+ 		articleList = dbPro.getArticles(startRow, endRow);
+ 	}
+   	 
+} else { // 검색 일 경우
+	
+	count = dbPro.getArticleCount(searchWhat, searchText); 
+  	 if(count > 0){ 
+		//하나라도 존재 하면 리스트를 출력해라
+		articleList = dbPro.getArticles(searchWhat, searchText, startRow, endRow);
+	}
+   	
+}
+   
+   	//전체 글의 수가 하나라도 존재하면 
+	if(count > 0){ 
+		//하나라도 존재 하면 리스트를 출력해라
+	articleList = dbPro.getArticles(startRow, endRow);
 	}
  	
- 	number = count;
+ 	number = count - (currentPage -1) * pageSize;
+    
     %>
     
     
@@ -75,11 +127,29 @@
 	BoardVO article = (BoardVO)articleList.get(i);
 	
 %>	
-<tr height = "30">					<!--내림차순으로 출력하기 위해 -- 연산자  -->
+	<tr height = "30">	<!--내림차순으로 출력하기 위해 -- 연산자  -->
 	<td align = "center" width ="50"> <%= number-- %></td>
 	<!-- 제목을 눌렀을때 글의 내용이 보이도록 연결 시켜줘아댜된다 -->
 	<td width ="250">
-	<a href = "content.jsp?num=<%= article.getNum() %>&pageNum = 1">
+	
+	<%
+	int wid = 0;
+	
+	if(article.getDepth() > 0) {
+		wid = 5 * (article.getDepth());	
+		
+	%>
+	
+	<img alt="" src="img/level.gif" width= "<%= wid %>" height = "16">
+	<img src= "img/re.gif">
+	
+	<% } else { %>
+	<img alt="" src="img/level.gif" width= "<%= wid %>" height = "16">
+	<% } %>
+	
+	
+	
+	<a href = "content.jsp?num=<%=article.getNum() %>&pageNum=<%=currentPage %>">
 	<%= article.getSubject() %></a>
 	<% if(article.getReadcount() >= 20){ %> <!-- 조회수가 20번이상 때 이미지 삽입 -->
 	<img src="img/hot.gif" border = "0" height = "16">
@@ -108,6 +178,64 @@
 </table> 
 
 <% } // end else문 %>
+
+
+<!-- 여기다가 페이지 블록  -->
+<%
+ if(count >0){
+	
+	 int pageBlock = 2;
+	
+	 int imsi = count % pageSize == 0? 0 : 1;
+	 
+	 int pageCount = count/pageSize + imsi;
+	 
+	 //시작 페이지 
+	 int startPage = (int)((currentPage-1)/pageBlock) * pageBlock +1;
+	 
+	 
+	 //마지막 페이지
+	 int endPage = startPage + pageBlock -1;
+	 
+	 //마지막으로 보여줄 페이지
+	 if(endPage > pageCount) endPage =  pageCount;
+	 
+	 //페이지 블럭을 이전버튼과 다음 버튼 작업
+	 
+	 if(startPage > pageBlock){
+%>
+	<a href ="list.jsp?pageNum=<%=startPage-pageBlock %>">[이전]</a>
+	
+	<% 							 
+	 }// end if
+	 for(int i =startPage; i<=endPage; i++){
+	 %>	 
+	 
+	 
+	<a href ="list.jsp?pageNum=<%=i %>">[<%=i %>]</a>
+	<% } //end for
+	if(endPage < pageCount) {
+
+	%>
+	<a href ="list.jsp?pageNum=<%=startPage+pageBlock %>">[다음]<a>
+	<%
+	}// end if
+} // end if
+%>
+
+<!-- 검색 창 -->
+	<form action="list.jsp">
+		<select name = "searchWhat" >
+			<option value ="writer">작성자</option>
+			<option value ="subject">제목</option>
+			<option value ="content">내용</option>
+		</select>
+		<input type="text" name ="searchText">
+		<input type="submit" name ="검색">
+	</form>
+
+
+
 
 </div>
 

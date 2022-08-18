@@ -86,6 +86,9 @@
 				 	<input type = "button" value = "글 삭제" onclick ="document.location.href='deleteForm.jsp?num=<%=article.getNum()%>&pageNum=<%=pageNum%>'">
 				 	&nbsp;&nbsp;&nbsp;&nbsp;
 				 	
+				 	<input type = "button" value = "답글쓰기" onclick ="document.location.href='writeForm.jsp?num=<%=num%>&ref=<%=ref%>&step=<%=step%>&depth=<%=depth%>'">
+				 	&nbsp;&nbsp;&nbsp;&nbsp;
+				 	
 				 	<input type = "button" value = "글 목록" onclick ="document.location.href='list.jsp?pageNum=<%=pageNum%>'">
 				 	&nbsp;&nbsp;&nbsp;&nbsp;
 				</td>
