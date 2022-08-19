@@ -428,7 +428,8 @@ public class BoardDAO {
 			return result;
 	 }
 	 
-	 //오버라이딩 매개변수가 달름 위에꺼랑 조심!
+	 //오버로딩 매개변수가 달름 위에꺼랑 조심! 
+	 //검색한 내용이 몇개 있는지를 반환하는 기능 (what : 검색조건,  content : 검색내용 )
 	 public int getArticleCount(String what, String content) {
 
 			Connection conn = null;
@@ -438,15 +439,13 @@ public class BoardDAO {
 			int x =0;
 			
 			try {
-				conn = ConnUtil.getConnection();
-				pstmt = conn.prepareStatement("select count(*) from board"); //전체 개수를 얻어 온다
+				conn = ConnUtil.getConnection();								// 
+				pstmt = conn.prepareStatement("select count(*) from board where "+what+" like '%"+content+"%' "); 
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
-					x = rs.getInt(1); //첫번째 컬럼을 가져온다 첫번째 컬럼이 num?
+					x = rs.getInt(1); 
 				}
-				//list를 arraylist에 저장한 다음에 그걸로 뿌려준다.
-				
-				
+			
 			}catch (SQLException s1) {
 				s1.printStackTrace();
 			} finally {
@@ -458,7 +457,8 @@ public class BoardDAO {
 			return x;
 		}// end of  getArticleCount
 	 
-	 //오버라이딩 매개변수 4
+	 //오버로딩 매개변수 4
+	 //검색한 내용을 리스트로 받아옴 (what:검색조건 content:검색내용, 시작번호, 끝번호 ) 시작번호와 끝번호는 페이지 처리용 
 	 	public List<BoardVO> getArticles(String what, String content, int start, int end){
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -467,14 +467,18 @@ public class BoardDAO {
 			List<BoardVO> articleList = null; //리턴할 객체 생성
 			
 			try {
-				conn = ConnUtil.getConnection();                 //내림차순으로
-				/* pstmt = conn.prepareStatement("select * from board order by num desc"); */
+				conn = ConnUtil.getConnection();                
+				
+				
+				
+				
+				
 				//안쪽 쿼리가 서브 바깥쪽 쿼리가 메인
 				pstmt = conn.prepareStatement("select * from (" 
 				+ "select rownum rnum, num, writer, email, subject, "
 				+ "pass, regdate, readcount, ref, step, depth, content, ip from ("
-				+ "select * from board order by ref desc, step asc))"
-				+ "where rnum >=? and rnum <= ? "); //rnum이 시작번호 
+				+ "select * from board where "+what+" like '%" +content+"%' order by ref desc, step asc))"
+				+ "where rnum >=? and rnum <= ? "); //rnum이시작번호 
 				
 				//위에 쿼리문에서 바인딩 함수가 2개임
 				pstmt.setInt(1, start);
