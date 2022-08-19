@@ -68,12 +68,7 @@
    	
 }
    
-   	//전체 글의 수가 하나라도 존재하면 
-	if(count > 0){ 
-		//하나라도 존재 하면 리스트를 출력해라
-	articleList = dbPro.getArticles(startRow, endRow);
-	}
- 	
+  
  	number = count - (currentPage -1) * pageSize;
     
     %>
@@ -182,46 +177,56 @@
 
 <!-- 여기다가 페이지 블록  -->
 <%
- if(count >0){
-	
-	 int pageBlock = 2;
-	
-	 int imsi = count % pageSize == 0? 0 : 1;
-	 
-	 int pageCount = count/pageSize + imsi;
-	 
-	 //시작 페이지 
-	 int startPage = (int)((currentPage-1)/pageBlock) * pageBlock +1;
-	 
-	 
-	 //마지막 페이지
-	 int endPage = startPage + pageBlock -1;
-	 
-	 //마지막으로 보여줄 페이지
-	 if(endPage > pageCount) endPage =  pageCount;
-	 
-	 //페이지 블럭을 이전버튼과 다음 버튼 작업
-	 
-	 if(startPage > pageBlock){
-%>
-	<a href ="list.jsp?pageNum=<%=startPage-pageBlock %>">[이전]</a>
-	
-	<% 							 
-	 }// end if
-	 for(int i =startPage; i<=endPage; i++){
-	 %>	 
-	 
-	 
-	<a href ="list.jsp?pageNum=<%=i %>">[<%=i %>]</a>
-	<% } //end for
-	if(endPage < pageCount) {
+//페이지 블럭
 
-	%>
-	<a href ="list.jsp?pageNum=<%=startPage+pageBlock %>">[다음]<a>
-	<%
-	}// end if
-} // end if
+if(count > 0){
+ 
+ int pageBlock = 4;
+
+ int imsi = count % pageSize == 0? 0:1;
+ 
+ int pageCount = count/pageSize + imsi;
+ 
+ //시작 페이지
+ int startPage = (int)((currentPage-1)/pageBlock)*pageBlock+1;   
+ 
+ //마지막 페이지
+ int endPage = startPage + pageBlock -1;
+ 
+ //마지막으로 보여줄 페이지
+ if(endPage > pageCount)endPage = pageCount;
+ 
+ //페이지 블럭을 이전과 다음 작업
+ if(startPage > pageBlock){
+    //검색일 경우와 아닐 경우 페이지 처리
+    if(searchText == null){
 %>
+	 <a href="list.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a>
+ <%}else{%>
+ 	<a href="list.jsp?pageNum=<%=startPage-pageBlock%>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[이전]</a>
+<%
+ }//end else
+}//end if
+	for(int i = startPage; i <= endPage; i++){
+ 	if(searchText == null){
+%>
+	<a href="list.jsp?pageNum=<%=i %>">[<%=i%>]</a>
+ 	<%}else{ %>
+	<a href="list.jsp?pageNum=<%=i %>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[<%=i%>]</a>
+<%
+    }//end else
+ }//end for
+ 	if(endPage < pageCount){
+    	if(searchText == null){
+%>   
+ 	<a href="list.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a>
+ 	<%}else{ %>
+ 	<a href="list.jsp?pageNum=<%=startPage+pageBlock%>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[다음]</a>
+<%
+    }//endelse
+ }//end if
+}//end 종합 if(count > 0)
+%>   
 
 <!-- 검색 창 -->
 	<form action="list.jsp">
