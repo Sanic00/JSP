@@ -22,5 +22,5 @@
 
   <script type ="text/javascript">
   alert("로그아웃했넹?");
-  location.href="cookieMemberLogin.jsp";
+  location.href="sessionMemberLogin.jsp";
   </script>
