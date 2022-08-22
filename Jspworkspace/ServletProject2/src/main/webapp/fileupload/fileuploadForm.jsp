@@ -7,6 +7,7 @@
 <title>File Upload Form</title>
 </head>
 <body>
+<!--여러개를 한꺼번에 업로드 할려면 배열로 해서 뿌린다함 (잘따라와야됨 무지하게 어려움)  -->
 
 <div align = "center">                           <!--이 인코딩 압축형태가 빠지면 안된다.-->         
 	<form action="fileUpload.jsp"  method="post" enctype="multipart/form-data">
