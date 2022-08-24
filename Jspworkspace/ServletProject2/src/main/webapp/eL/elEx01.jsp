@@ -7,7 +7,7 @@
     customer.setName("홍길동");
     customer.setEmail("hong123@naver.com");
     customer.setPhone("123-1234-1234");
-    								//객체명				
+    					//객체명	 //객체		
     request.setAttribute("customer", customer);
     
     	//키 					
