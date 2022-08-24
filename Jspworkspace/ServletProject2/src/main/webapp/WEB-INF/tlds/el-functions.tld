@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" 
+xmlns="http://java.sun.com/xml/ns/javaee" 
+xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd ">
+  <tlib-version>1.0</tlib-version>
+  <short-name>NMTOKEN</short-name>
+  
+
+  <function>
+  		<description>Date 객체를 포맷팅하여 출력</description>
+  	 	<name>dateFormat</name>
+   		<function-class>com.el.DateUtil</function-class> <!--el에서 사용할 함수의 이름  -->
+  		<function-signature> <!--함수의 기능을 실행할 메서드 리턴타입이 string 매개변수 date  -->
+  		 java.lang.String format(java.util.Date)
+  		</function-signature>
+  </function>
+  
+  
+  
+  
+</taglib>

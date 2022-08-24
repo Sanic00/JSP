@@ -122,6 +122,14 @@
  	<location>/error/errorNullPointer.jsp</location>
 </error-page> -->
 
+<jsp-config>
+	<taglib>
+	 	  <taglib-uri>/WEB-INF/tlds/el-functions.tld</taglib-uri>	<!--루트(경로)를 설정해줘야됨  -->
+	 	  <taglib-location>/WEB-INF/tlds/el-functions.tld</taglib-location>	<!--명시적으로 위치를 잡아줘야 된다. -->
+	 	 
+	</taglib>
+</jsp-config>
+
 
 
 </web-app>
