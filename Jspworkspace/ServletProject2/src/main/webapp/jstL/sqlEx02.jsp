@@ -12,10 +12,18 @@
 <title></title>
 </head>
 <body>
-<!--자바코드가 없어지기 때문에 쓰이는 고오급언어임 대부분2개만 사용  -->
+<!--update -->
+<sql:update dataSource="jdbc/myoracle">
+	update tempmember set passwd=? where id=?
+<%--쿼리문을 파라미터로 --%>
+	<sql:param value="${3456}"/>
+	<sql:param value="${'aaaa'}"/>		
+</sql:update>
+
 <sql:query var="rs" dataSource="jdbc/myoracle">
 select * from tempmember
 </sql:query>
+
 
 <table border="1">
 	<tr><%--필드명 출력 ex)이름/pass/name.... --%>
