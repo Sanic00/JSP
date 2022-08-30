@@ -131,5 +131,32 @@
 </jsp-config>
 
 
+<!--mvc2 에 1번쨰 방법때 사용  -->
+<!-- <servlet>
+	<servlet-name>controlOne</servlet-name>
+	<servlet-class>com.mvc.control.ControlServlet</servlet-class> 패키지 
+
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>controlOne</servlet-name> 
+	<url-pattern>*.do</url-pattern>
+</servlet-mapping>
+ -->
+
+<!--mvc2 에 2번쨰 방법때 사용  -->
+<servlet>
+	<servlet-name>ControllerURI</servlet-name>
+	<servlet-class>mvc.Controller</servlet-class>
+	<init-param> <!--파라미터 이름   -->
+		<param-name>propertyConfig</param-name>
+		<param-value>Command.properties</param-value>
+	</init-param>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>ControllerURI</servlet-name> 
+	<url-pattern>*.do</url-pattern>
+</servlet-mapping>
 
 </web-app>
