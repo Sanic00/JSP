@@ -12,7 +12,7 @@
     <%
     //deleteform 에서 hideen으로 해서 가져옴
     int num = Integer.parseInt(request.getParameter("num"));
-    String pageNum = request.getParameter("pagenum");
+    String pageNum = request.getParameter("pageNum");
     
     //pass deleteform 패스에 가져온다.
     String pass = request.getParameter("pass");

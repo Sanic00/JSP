@@ -10,12 +10,12 @@
     </jsp:useBean>
     <%
     
-    String pageNum = request.getParameter("pagenum");
+    String pageNum = request.getParameter("pageNum");
     BoardDAO dbPro = BoardDAO.getInstance();
     
     int check = dbPro.updateArticle(article);
     
-    if(check ==1){
+    if(check == 1){
     
     %>
     
