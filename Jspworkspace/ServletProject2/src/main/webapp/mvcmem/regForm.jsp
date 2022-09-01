@@ -9,8 +9,8 @@
 <script type="text/javascript" src = "script.js"></script>
 </head>
 <body>
-   <!--여기가 DB랑 연동   -->
-	<form action = "regProc.jsp" method = "post" name = "regForm">
+   <!-- ActionFactory로  action여기부분 수정됨 -->  
+	<form action = "member.mdo?cmd=regProc" method = "post" name = "regForm">
 		<table border = "1">
 		     <tr>
 				<td colspan = "2" align="center">회원가입 정보 입력</td>
