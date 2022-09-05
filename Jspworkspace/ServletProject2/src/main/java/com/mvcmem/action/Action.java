@@ -12,6 +12,6 @@ import com.mvcmem.control.*;
 public interface Action {
 	
 	public ActionForward execute(HttpServletRequest request,
-			HttpServletResponse response) throws IOException;
+			HttpServletResponse response)throws IOException;
 	
 }

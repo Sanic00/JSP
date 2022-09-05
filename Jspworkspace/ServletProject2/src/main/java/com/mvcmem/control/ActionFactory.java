@@ -1,9 +1,18 @@
 package com.mvcmem.control;
 
 import com.mvcmem.action.Action;
+import com.mvcmem.action.DeleteFormAction;
+import com.mvcmem.action.DeleteProcAction;
+import com.mvcmem.action.IdCheckAction;
 import com.mvcmem.action.IndexAction;
-import com.mvcmem.action.LegFormAction;
+import com.mvcmem.action.RegFormAction;
+import com.mvcmem.action.RegProcAction;
+import com.mvcmem.action.ZipCheckAction;
 import com.mvcmem.action.LoginFormAction;
+import com.mvcmem.action.LoginProcAction;
+import com.mvcmem.action.LogoutProcAction;
+import com.mvcmem.action.ModifyFormAction;
+import com.mvcmem.action.ModifyProcAction;
 
 /*
  * 싱글톤 패턴애플리케이션이 시작될 때 어떤 클래스가 최초 한번만 메모리를 할당하고(Static) 
@@ -15,6 +24,8 @@ import com.mvcmem.action.LoginFormAction;
  * 데이터를 공유하기 쉽다.DBCP(DataBase Connection Pool)처럼 공통된 객체를 여러개 생성해서 사용해야하는 
  * 상황에서 많이 사용
  */
+
+//ActionFactory : 사용자의 요청을 처리할 비즈니스 로직이 구현된 XXXAction 객체의 생성을 담당함 
 public class ActionFactory {
 	
 	//싱글톤으로 만들어라
@@ -46,10 +57,51 @@ public class ActionFactory {
 			case"login":
 				action = new LoginFormAction();
 				break;
+			
+			case"loginProc":
+				action = new LoginProcAction();
+				break;
+				
+			case"logout":
+				action = new LogoutProcAction();
+				break;	
 				
 			case"regForm":
-				action = new LegFormAction();
+				action = new RegFormAction();
 				break;
+				
+			case"regProc":
+				action = new RegProcAction();
+				break;
+				
+			case"idCheck":
+				action = new IdCheckAction();
+				break;
+				
+			case"zipCheck":
+				action = new ZipCheckAction();
+				break;
+				
+			case"modifyForm":
+				action = new ModifyFormAction();
+				break;
+				
+			case"modifyProc":
+				action = new ModifyProcAction();
+				break;
+				
+			case"deleteForm":
+				action = new DeleteFormAction();
+				break;
+				
+			case"deleteProc":
+				action = new DeleteProcAction();
+				break;
+				
+		
+		
+		
+				
 				
 				
 				

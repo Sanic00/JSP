@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvcmem.control.ActionForward;
 
-public class LoginFormAction implements Action {
+public class DeleteFormAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
-		return new ActionForward("/mvcmem/login.jsp", false);
+		return new ActionForward("/mvcmem/deleteForm.jsp",false);
 	}
-	
+
 }

@@ -3,7 +3,7 @@ package com.mvcmem.model;
 import java.sql.*;
 import javax.sql.*;
 
-import com.boardone.BoardDAO;
+/*import com.boardone.BoardDAO;*/
 
 import javax.naming.*;
 import java.util.*;
