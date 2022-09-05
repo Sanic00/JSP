@@ -145,10 +145,10 @@
  -->
 
 <!--mvc2 에 2번쨰 방법때 사용  -->
-<servlet>
+<!-- <servlet>
 	<servlet-name>ControllerURI</servlet-name>
 	<servlet-class>mvc.Controller</servlet-class>
-	<init-param> <!--파라미터 이름   -->
+	<init-param> 파라미터 이름  
 		<param-name>propertyConfig</param-name>
 		<param-value>Command.properties</param-value>
 	</init-param>
@@ -157,6 +157,35 @@
 <servlet-mapping>
 	<servlet-name>ControllerURI</servlet-name> 
 	<url-pattern>*.do</url-pattern>
+</servlet-mapping> -->
+
+<!--MVC2 2번째 방법 게시판임 -->
+<servlet>
+	<servlet-name>Controller</servlet-name>
+	<servlet-class>com.board.controller.ControllerAction</servlet-class>
+	<init-param>  
+		<param-name>propertyConfig</param-name>
+		<param-value>CommandPro.properties</param-value>
+	</init-param>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>Controller</servlet-name> 
+	<url-pattern>*.bdo</url-pattern>
+</servlet-mapping> 
+
+
+
+
+<!--회원관리 MVC2 1번째 방법   -->
+<servlet>
+	<servlet-name>myControl</servlet-name>
+	<servlet-class>com.mvcmem.control.ControlServlet</servlet-class> 
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>myControl</servlet-name> 
+	<url-pattern>*.mdo</url-pattern>
 </servlet-mapping>
 
 </web-app>
