@@ -213,7 +213,7 @@ public class BoardDAO {
 	 */
 	
 	 public BoardVO getArticle(int num) {
-		 Connection conn = null;
+		 	Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			BoardVO article = null;

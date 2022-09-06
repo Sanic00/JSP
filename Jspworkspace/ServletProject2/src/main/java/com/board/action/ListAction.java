@@ -16,7 +16,7 @@ public class ListAction implements CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 	
 		//한 페이지에  보여줄 글 목록 수 지정
-	    int pageSize = 8;
+	    int pageSize = 5;
 	    
 	    String pageNum = request.getParameter("pageNum");
 	 
@@ -33,6 +33,8 @@ public class ListAction implements CommandAction {
 	   	int number = 0;
 	   	List<BoardVO> articleList = null;
 	   	BoardDAO dbPro = BoardDAO.getInstance(); // db연결
+	   	
+	   	count = dbPro.getArticleCount(); // 전체의 글을 불러오도록
 	   	
 	   	 if(count > 0){ 
 	 		//하나라도 존재 하면 리스트를 출력해라
