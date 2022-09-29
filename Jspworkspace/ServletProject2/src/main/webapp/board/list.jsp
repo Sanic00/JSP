@@ -11,6 +11,20 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript">
+function check() {
+	if(document.find_frm.findbox.value==""){
+	 	alert("검색어를 입력해주세요");
+		return false;
+	}
+}
+function frm_sub (i) {
+	i_frm.action="/ServletProject2/board/list.bdo?pageNum="+i;
+	i_frm.submit();
+}
+
+
+</script>
 </head>
 <body bgcolor = "${bodyback_c}">
 
@@ -118,18 +132,45 @@
 		</c:if>	
 		
 		<c:if test="${startPage > pageBlock }">	
-	 		<a href="/ServletProject2/board/list.bdo?pageNum=${startPage-pageBlock }">[이전]</a>
+	 		<%-- <a href="/ServletProject2/board/list.bdo?pageNum=${startPage-pageBlock }">[이전]</a> --%>
+	 		<a href="#" onclick="frm_sub(${startPage-pageBlock})">[이전]</a>
 		</c:if>	
 		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<a href="/ServletProject2/board/list.bdo?pageNum=${i }">[${i }]</a>
+			<%-- <a href="/ServletProject2/board/list.bdo?pageNum=${i }">[${i }]</a> --%>
+			<a href="#" onclick="frm_sub(${i}")>[${i}]</a>
 		</c:forEach>
 
  		<c:if test="${endPage < pageCount }">
- 			<a href="/ServletProject2/board/list.bdo?pageNum=${startPage+pageBlock }">[다음]</a>
+ 			<%-- <a href="/ServletProject2/board/list.bdo?pageNum=${startPagepageBlock }">[다음]</a> --%>
+ 			<a href="#" onclick="frm_sub(${startPagepageBlock })">[다음]</a>
 		</c:if>
 </c:if>
+
+<form action="" method="post" name="i_frm">
+	<input type="hidden" name="find_box" value="${find_box}">
+	<input type="hidden" name="find" value="${find}">
+	
+</form>
+
+
+
+
+
+<!-- 검색 창 -->
+	<form action="/ServletProject2/board/list.bdo" method="post" name="find_frm" 
+	onsubmit="return check()">
+		<select name = "find" >
+			<option value ="">작성자</option>
+			<option value ="subject">제목</option>
+			<option value ="content">내용</option>
+		</select>
+		<input type="text" name ="find_box">
+		<input type="submit" name ="검색">
+	</form>
 </div>
+
+
 
 </body>
 </html>
