@@ -15,6 +15,8 @@ select * from tab;
  * regdate 작성 날짜
  * content 게시글 내용
  */
+select * from board;
+
 
 create table board(
 num         number(7) not null,

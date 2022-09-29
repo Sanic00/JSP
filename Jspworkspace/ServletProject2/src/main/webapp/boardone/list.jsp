@@ -193,7 +193,7 @@ if(count > 0){
  //마지막 페이지
  int endPage = startPage + pageBlock -1;
  
- //마지막으로 보여줄 페이지
+ //마지막으로 보여줄 페이지MJJJJ
  if(endPage > pageCount)endPage = pageCount;
  
  //페이지 블럭을 이전과 다음 작업
